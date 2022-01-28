@@ -1,0 +1,274 @@
+[
+    {
+        "id": "e081911d2b9e37c0",
+        "type": "tab",
+        "label": "Flow03 - Temp MX",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4567c28699a88cd3",
+        "type": "mqtt in",
+        "z": "e081911d2b9e37c0",
+        "name": "flow03-temp",
+        "topic": "sic/flow3/temp",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b6d75241c25f5871",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "96d0a04dc5ee5f8d"
+            ]
+        ]
+    },
+    {
+        "id": "96d0a04dc5ee5f8d",
+        "type": "json",
+        "z": "e081911d2b9e37c0",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 210,
+        "y": 240,
+        "wires": [
+            [
+                "1605abfc6fefe415",
+                "67bf953ee964f35b",
+                "ea15beb6b0b3704d"
+            ]
+        ]
+    },
+    {
+        "id": "1605abfc6fefe415",
+        "type": "function",
+        "z": "e081911d2b9e37c0",
+        "name": "f1",
+        "func": "msg.payload = msg.payload.id\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "a92d3f7d913b615d",
+                "1110637a5f603efe"
+            ]
+        ]
+    },
+    {
+        "id": "67bf953ee964f35b",
+        "type": "function",
+        "z": "e081911d2b9e37c0",
+        "name": "f2",
+        "func": "msg.payload = msg.payload.temp\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "6621da14f75d11a0"
+            ]
+        ]
+    },
+    {
+        "id": "ea15beb6b0b3704d",
+        "type": "function",
+        "z": "e081911d2b9e37c0",
+        "name": "f3",
+        "func": "msg.topic = msg.payload.id;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 320,
+        "wires": [
+            [
+                "dc548c6770becd54"
+            ]
+        ]
+    },
+    {
+        "id": "a92d3f7d913b615d",
+        "type": "ui_text_input",
+        "z": "e081911d2b9e37c0",
+        "name": "",
+        "label": "Nombre",
+        "tooltip": "",
+        "group": "7b16d471a02aa9ef",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 540,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6621da14f75d11a0",
+        "type": "ui_gauge",
+        "z": "e081911d2b9e37c0",
+        "name": "",
+        "group": "7b16d471a02aa9ef",
+        "order": 7,
+        "width": "6",
+        "height": "6",
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": "-15",
+        "max": "45",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 540,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "dc548c6770becd54",
+        "type": "ui_chart",
+        "z": "e081911d2b9e37c0",
+        "name": "",
+        "group": "3c3d01190979bd98",
+        "order": 8,
+        "width": "10",
+        "height": "7",
+        "label": "Historico",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "-15",
+        "ymax": "45",
+        "removeOlder": "5",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 520,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1110637a5f603efe",
+        "type": "debug",
+        "z": "e081911d2b9e37c0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b6d75241c25f5871",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": "",
+        "credentials": {
+            "user": "",
+            "password": ""
+        }
+    },
+    {
+        "id": "7b16d471a02aa9ef",
+        "type": "ui_group",
+        "name": "Actual",
+        "tab": "9082f3c65f76fd74",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "3c3d01190979bd98",
+        "type": "ui_group",
+        "name": "Historico",
+        "tab": "9082f3c65f76fd74",
+        "order": 2,
+        "disp": false,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "9082f3c65f76fd74",
+        "type": "ui_tab",
+        "name": "Flow3",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
