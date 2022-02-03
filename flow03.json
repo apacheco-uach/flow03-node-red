@@ -1,13 +1,5 @@
 [
     {
-        "id": "e081911d2b9e37c0",
-        "type": "tab",
-        "label": "Flow03 - Temp MX",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "4567c28699a88cd3",
         "type": "mqtt in",
         "z": "e081911d2b9e37c0",
@@ -15,7 +7,7 @@
         "topic": "sic/flow3/temp",
         "qos": "2",
         "datatype": "auto",
-        "broker": "b6d75241c25f5871",
+        "broker": "56f97204ead1911f",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -112,7 +104,7 @@
         "label": "Nombre",
         "tooltip": "",
         "group": "7b16d471a02aa9ef",
-        "order": 6,
+        "order": 1,
         "width": 0,
         "height": 0,
         "passthru": true,
@@ -132,9 +124,9 @@
         "z": "e081911d2b9e37c0",
         "name": "",
         "group": "7b16d471a02aa9ef",
-        "order": 7,
+        "order": 2,
         "width": "6",
-        "height": "6",
+        "height": "5",
         "gtype": "gage",
         "title": "Temperatura",
         "label": "ºC",
@@ -213,10 +205,118 @@
         "wires": []
     },
     {
-        "id": "b6d75241c25f5871",
+        "id": "8c8019a4dc7dcab7",
+        "type": "ui_switch",
+        "z": "e081911d2b9e37c0",
+        "name": "",
+        "label": "switch",
+        "tooltip": "",
+        "group": "7b16d471a02aa9ef",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "x": 120,
+        "y": 460,
+        "wires": [
+            [
+                "44d378fbe41c5b5b",
+                "febfb679343b76f9"
+            ]
+        ]
+    },
+    {
+        "id": "928c4e48cf9b4a06",
+        "type": "mqtt out",
+        "z": "e081911d2b9e37c0",
+        "name": "Interruptor",
+        "topic": "sic/flow3/switch/hugovargas",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "56f97204ead1911f",
+        "x": 510,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "44d378fbe41c5b5b",
+        "type": "function",
+        "z": "e081911d2b9e37c0",
+        "name": "send text",
+        "func": "msg.payload = msg.payload? \"Alberto encendió switch\" : \"Alberto apagó el switch\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "928c4e48cf9b4a06"
+            ]
+        ]
+    },
+    {
+        "id": "66320b12e51fd553",
+        "type": "mqtt out",
+        "z": "e081911d2b9e37c0",
+        "name": "Enviar Temp",
+        "topic": "sic/flow3/temp",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "56f97204ead1911f",
+        "x": 490,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "febfb679343b76f9",
+        "type": "function",
+        "z": "e081911d2b9e37c0",
+        "name": "send temp",
+        "func": "msg.payload = { \n    \"id\": \"Alberto Pacheco\", \n   \"temp\": (msg.payload? \"10\" : \"20\") \n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 540,
+        "wires": [
+            [
+                "66320b12e51fd553"
+            ]
+        ]
+    },
+    {
+        "id": "56f97204ead1911f",
         "type": "mqtt-broker",
         "name": "",
-        "broker": "broker.hivemq.com",
+        "broker": "35.157.158.119",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -236,11 +336,7 @@
         "willQos": "0",
         "willPayload": "",
         "willMsg": {},
-        "sessionExpiry": "",
-        "credentials": {
-            "user": "",
-            "password": ""
-        }
+        "sessionExpiry": ""
     },
     {
         "id": "7b16d471a02aa9ef",
